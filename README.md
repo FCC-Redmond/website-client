@@ -1,4 +1,4 @@
-# ALL PARTICIPANTS MUST ABIDE BY THIS CODE OF CONDUCT
+# ALL PARTICIPANTS MUST AGREE TO AND ABIDE BY THIS CODE OF CONDUCT
 
 A. You must be a valid member of the Free Code Camp Redmond, WA Community.
 
