@@ -32,4 +32,4 @@ F. Make use of Frequent commmits, good, informative messages, and no working dir
 2. Read https://smacss.com/
 3. Read https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 3. You won't be separating everything in different .css files, but you can practice in your own .css files under '/member' by separating your categories using CSS comments.
-4. Design Mobile First. We will have an example wireframe in the repo.
+4. Design ONLY for mobile for now. See the 'wireframes/fcc-redmond-profile-wireframe.png' file
