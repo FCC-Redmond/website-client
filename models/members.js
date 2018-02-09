@@ -25,17 +25,17 @@ var app = app || {};
       "method": "POST",
       "headers": {
         "Content-Type": "application/json",
-        "Cache-Control": "no-cache",
-        "Postman-Token": "6f60d89d-34a3-8bfb-c2a6-9b4a9c6990b9"
+        "Cache-Control": "no-cache"
       },
       "processData": false,
-      "data": JSON.stringify(member)
+      "data": JSON.stringify(member),
+      "error": err => console.error(errorCallback(err))
     }
   ).done(function (response) {
     console.log(response);
-  });
+  })
 
-  Member.getSkill = (skill) => $.getJSON(_API_URL_ + '/api/v0/members/' + skill).then(data => console.log(data)).catch(err => console.error(errorCallback(err)));
+  Member.getSkill = (skills) => $.getJSON(_API_URL_ + '/api/v0/members?skills=' + skills).then(data => console.log(data)).catch(err => console.error(errorCallback(err)));
 
   module.Member = Member;
   
