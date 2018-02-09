@@ -35,7 +35,9 @@ var app = app || {};
     console.log(response);
   })
 
-  Member.getSkill = (skills) => $.getJSON(_API_URL_ + '/api/v0/members?skills=' + skills).then(data => console.log(data)).catch(err => console.error(errorCallback(err)));
+  Member.getSkill = (skills) => $.getJSON(_API_URL_ + '/api/v0/members?skills=' + encodeURIComponent(skills)).then(data => {
+    console.log(data);
+  }).catch(err => console.error(errorCallback(err)));
 
   module.Member = Member;
   
