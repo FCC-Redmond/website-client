@@ -4,8 +4,8 @@ var app = app || {};
 
 (module => {
 
-  const _API_URL_ = 'http://localhost:3000';
-  // const _API_URL_ = 'https://fccredmond.herokuapp.com';
+  // const _API_URL_ = 'http://localhost:3000';
+  const _API_URL_ = 'https://fccredmond.herokuapp.com';
 
   function Member() { };
 
