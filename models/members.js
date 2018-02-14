@@ -7,7 +7,7 @@ var app = app || {};
   const _API_URL_ = 'http://localhost:3000';
   // const _API_URL_ = 'https://fccredmond.herokuapp.com';
 
-  function Member() { }
+  function Member() { };
 
   function errorCallback(err) {
     console.error(err);
@@ -15,7 +15,7 @@ var app = app || {};
 
   Member.fetchAll = () => $.getJSON(_API_URL_ + '/api/v0/members').then(data => console.log(data)).catch(err => console.error(errorCallback(err)));
 
-  Member.fetchMember = (lName) => $.getJSON(_API_URL_ + '/api/v0/members/' + lName).then(data => console.log(data)).catch(err => console.error(errorCallback(err)));
+  Member.fetchMember = (lName) => $.getJSON(_API_URL_ + '/api/v0/members/' + lName.toLowerCase()).then(data => console.log(data)).catch(err => console.error(errorCallback(err)));
 
   Member.addMember = (member) => $.ajax(
     {
@@ -35,10 +35,55 @@ var app = app || {};
     console.log(response);
   })
 
+  Member.update = (member, id) =>
+    $.ajax({
+      "async": true,
+      "crossDomain": true,
+      "url": _API_URL_ + "/api/v0/members/" + id,
+      "method": "PUT",
+      "headers": {
+        "Content-Type": "application/json",
+        "Cache-Control": "no-cache"
+      },
+      "processData": false,
+      data: JSON.stringify(member)
+    })
+      .then(data => console.log(data))
+      .catch(errorCallback);
+
   Member.getSkill = (skills) => $.getJSON(_API_URL_ + '/api/v0/members?skills=' + encodeURIComponent(skills)).then(data => {
     console.log(data);
   }).catch(err => console.error(errorCallback(err)));
 
+  Member.delete = (id) =>
+  $.ajax({
+    "async": true,
+    "crossDomain": true,
+    "url": _API_URL_ + "/api/v0/members/" + id,
+    "method": "DELETE",
+    "headers": {
+      "Content-Type": "application/json",
+      "Cache-Control": "no-cache"
+    },
+    "processData": false,
+  })
+    .then(data => console.log(data))
+    .catch(errorCallback);
+
   module.Member = Member;
-  
+
 })(app);
+
+
+// let user = {
+// 	"memberProfile": {
+// 		"skills":["JavaScript", "NodeJs", "ExpressJs", "MongoDB"],
+// 		"lastName": "Kim",
+// 		"firstName": "Amber",
+// 		"linkedInUrl": "",
+// 		"gitHubUrl": "",
+// 		"profileUrl": "",
+// 		"email": "ambergkim10@gmail.com",
+// 		"_id": 5a839ea26aa4f73c79d8386e
+// 	}
+// }
