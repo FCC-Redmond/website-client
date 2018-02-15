@@ -7,15 +7,19 @@ var app = app || {};
   // const _API_URL_ = 'http://localhost:3000';
   const _API_URL_ = 'https://fccredmond.herokuapp.com';
 
-  function Member() { };
+  const Member = {};
 
   function errorCallback(err) {
     console.error(err);
   }
 
-  Member.fetchAll = () => $.getJSON(_API_URL_ + '/api/v0/members').then(data => console.log(data)).catch(err => console.error(errorCallback(err)));
+  Member.fetchAll = (callback) => $.getJSON(_API_URL_ + '/api/v0/members').then(data => {
+    callback(data);
+  }).catch(err => console.error(errorCallback(err)));
 
-  Member.fetchMember = (lName) => $.getJSON(_API_URL_ + '/api/v0/members/' + lName.toLowerCase()).then(data => console.log(data)).catch(err => console.error(errorCallback(err)));
+  Member.fetchMember = (lName, callback) => $.getJSON(_API_URL_ + '/api/v0/members/' + lName.toLowerCase()).then(data => {
+    callback(data);
+  }).catch(err => console.error(errorCallback(err)));
 
   Member.addMember = (member) => $.ajax(
     {
@@ -51,9 +55,12 @@ var app = app || {};
       .then(data => console.log(data))
       .catch(errorCallback);
 
-  Member.getSkill = (skills) => $.getJSON(_API_URL_ + '/api/v0/members?skills=' + encodeURIComponent(skills)).then(data => {
-    console.log(data);
-  }).catch(err => console.error(errorCallback(err)));
+  Member.getSkill = (skill, callback) => $.getJSON(_API_URL_ + '/api/v0/members?skills=' + encodeURIComponent(skill)).then(
+    data => {
+      callback(data);
+      console.log(data);
+    }
+  ).catch(err => console.error(errorCallback(err)));
 
   Member.delete = (id) =>
   $.ajax({
