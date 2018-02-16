@@ -44,7 +44,11 @@ var app = app || {};
   }
 
   $("#skill-input").change(() => {
-    let skill = $("#skill-input").val()
+    let skill = $("#skill-input").val();
+    if (!skill || skill.length == 0) {
+      memberView.init();
+      return;
+    }
     app.Member.getSkill(skill, (data) => {
       if (data.success === false) {
         $("#member-display").empty();
@@ -56,7 +60,11 @@ var app = app || {};
   });
 
   $("#lName-input").change(() => {
-    let lName = $("#lName-input").val()
+    let lName = $("#lName-input").val();
+    if (!lName || lName.length == 0) {
+      memberView.init();
+      return;
+    }
     app.Member.fetchMember(lName, (data) => {
       if (data.success === false) {
         $("#member-display").empty();
