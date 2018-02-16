@@ -1,21 +1,22 @@
 
 
 .mainContainer{      
-    background-color:#397249;
+    background-color:	#1f761c;
 }
 
 .flexContainer{
-    margin:30px;    
-    background-color: #c7e1ba ;
+    margin:30px; 
+      
+    background-color: 		#dbf986 ;
     display:flex;   
     justify-content:space-around;
-    border:1px solid #397249;   
+    border:1px solid 	#356a00;   
 }
 
 .imageClas{
     height:150px;
     width:150px;
-    border:2px outset #397249;
+    border:4px outset 	#356a00;
     border-radius:50%;
 }
 article{
@@ -23,7 +24,7 @@ article{
     margin-top:30px;
 }
 .colorDark{
-   color: #135300;
+   color: 	#005601;
 }
 .fontCursive{
     font-family:cursive;
@@ -36,12 +37,12 @@ a{
 }
 /* unvisited link */
 a:link {
-    color: #135300;
+    color: 	#356a00;
 }
 
 /* visited link */
 a:visited {
-    color: #135300;
+    color:	#356a00;
 }
 
 /* mouse over link */
