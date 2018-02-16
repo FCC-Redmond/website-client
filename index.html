@@ -7,11 +7,35 @@
     <title>Document</title>
 </head>
 <body>
-    <nav></nav>
+    <nav>
+
+    </nav>
+    <main>
+        <section id="cta">
+            <h1>Welcome to the official page for the FCC Redmond, WA Chapter!</h1>
+            <p>Find our next events at:</p>
+            <button>Let's Go!</button>
+        </section>
+        <section id="member-section">
+                <input type="text" id="skill-input" placeholder="enter one skill">
+                <input type="text" id="lName-input" placeholder="enter a last name">
+            <div id="member-display"></div>
+        </section>
+        <section id="about">
+
+        </section>
+    </main>
+    <footer>
+
+    </footer>
     <script
   src="http://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
     <script src="models/members.js"></script>
+    <script src="views/members-view.js"></script>
+    <script>
+        app.memberView.init();
+    </script>
 </body>
 </html>
