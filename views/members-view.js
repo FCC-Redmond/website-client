@@ -25,6 +25,7 @@ var app = app || {};
         <li>Profile URL: ${member.profileUrl}</li>
         <li>Email: ${member.email}</li>
       </ul>
+      <button name="delete" id="${member._id}">Delete</button>
       `
     );
   }
@@ -32,7 +33,7 @@ var app = app || {};
   memberView.displayMultiple = (memberArr) => {
     $("#member-display").empty();
     let member = memberArr.data;
-    for (var i = 0; i < member.length; i ++) {
+    for (var i = 0; i < member.length; i++) {
       memberView.displayMember(member[i]);
     }
   }
@@ -42,6 +43,14 @@ var app = app || {};
       memberView.displayMultiple(data);
     })
   }
+
+  $("#member-display").on('click', 'button', (event) => {
+    let id = event.target.id;
+    app.Member.delete(id, (data) => {
+      console.log(data);
+      memberView.init();
+    });
+  });
 
   $("#skill-input").change(() => {
     let skill = $("#skill-input").val();

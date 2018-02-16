@@ -62,7 +62,7 @@ var app = app || {};
     }
   ).catch(err => console.error(errorCallback(err)));
 
-  Member.delete = (id) =>
+  Member.delete = (id,callback) =>
   $.ajax({
     "async": true,
     "crossDomain": true,
@@ -74,7 +74,7 @@ var app = app || {};
     },
     "processData": false,
   })
-    .then(data => console.log(data))
+    .then(data => callback(data))
     .catch(errorCallback);
 
   module.Member = Member;
