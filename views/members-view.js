@@ -35,22 +35,22 @@ var app = app || {};
 
   memberView.displayUpdateMember = (id) => {
     let member = {};
-    let test = $('#' + id).find('div,li').each((idx, element) => {
+    let test = $(`#${id}`).find('div,li').each((idx, element) => {
       console.log(element.getAttribute('name'));
       member[element.getAttribute('name')] = element.getAttribute('value');
     });
-    $('#' + id).empty();
-    $('#' + id).append(
+    $(`#${id}`).empty();
+    $(`#${id}`).append(
       `
-      <h2><input type="text" value="${member.firstName}">&nbsp;<input type="text" value="${member.lastName}"></h2>
-        <li name="skills">Skills:<input type="text" value="${member.skills}"></li>
-        <li name="linkedInUrl">LinkedIn URL:<input type="text" value="${member.linkedInUrl}"></li>
-        <li name="gitHubUrl">GitHub URL: <input type="text" value="${member.gitHubUrl}"></li>
-        <li name="profileUrl">Profile URL: <input type="text" value="${member.profileUrl}"></li>
-        <li name="email">Email:<input type="text" value="${member.email}"></li>
+      <h2><input name="firstName"  type="text" value="${member.firstName}">&nbsp;<input type="text"  name="lastName" value="${member.lastName}"></h2>
+        <li name="skills">Skills:<input name="skills" type="text" value="${member.skills}"></li>
+        <li name="linkedInUrl">LinkedIn URL:<input name="linkedInUrl" type="text" value="${member.linkedInUrl}"></li>
+        <li name="gitHubUrl">GitHub URL: <input name="gitHubUrl" type="text" value="${member.gitHubUrl}"></li>
+        <li name="profileUrl">Profile URL: <input name="profileUrl" type="text" value="${member.profileUrl}"></li>
+        <li name="email">Email:<input name="email" type="text" value="${member.email}"></li>
       </ul>
-      <button name="delete" value="${member._id}">Delete</button>
-      <button name="update" value="${member._id}">Update</button>
+      <button name="delete" value="${id}">Delete</button>
+      <button name="update" value="${id}">Update</button>
       `
     );
   };
@@ -80,8 +80,23 @@ var app = app || {};
           memberView.init();
         });
         break;
-      case "update": event.target.value = "Update";
-        memberView.displayUpdateMember(id);
+      case "update":
+        if (event.target.textContent == "Edit") {
+          event.target.textContent = "Update";
+          memberView.displayUpdateMember(id);
+        } else if (event.target.textContent == "Update") {
+          let member = {
+            "memberProfile": {}
+          };
+          $(`#${id}`).find('input').each((idx, element) => {
+            console.log(element.getAttribute('name') + ":"+ element.value);
+            member.memberProfile[element.getAttribute('name')] = element.value;
+          });
+          if ("skills" in member.memberProfile) {
+            member.memberProfile.skills = member.memberProfile.skills.split(',');
+          }
+          app.Member.update(member, id.toString());
+        }
         break;
       default:
         break;
