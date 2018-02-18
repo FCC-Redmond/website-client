@@ -18,7 +18,7 @@ var app = app || {};
     $("#member-display").append(
       `
       <div id="${member._id}">
-      <h2><div name="firstName" value=${member.firstName}>${member.firstName}</div><div name="lastName" value=${member.lastName}>${member.lastName}</div></h2>
+      <h2><span name="firstName" value=${member.firstName}>${member.firstName}</span>&nbsp;<span name="lastName" value=${member.lastName}>${member.lastName}</span></h2>
       <ul>
         <li name="skills" value=${member.skills}>Skills: ${skills}</li>
         <li name="linkedInUrl" value=${member.linkedInUrl}>LinkedIn URL: ${member.linkedInUrl}</li>
@@ -35,7 +35,7 @@ var app = app || {};
 
   memberView.displayUpdateMember = (id) => {
     let member = {};
-    let test = $(`#${id}`).find('div,li').each((idx, element) => {
+    let test = $(`#${id}`).find('span,li').each((idx, element) => {
       console.log(element.getAttribute('name'));
       member[element.getAttribute('name')] = element.getAttribute('value');
     });
@@ -96,6 +96,7 @@ var app = app || {};
             member.memberProfile.skills = member.memberProfile.skills.split(',');
           }
           app.Member.update(member, id.toString());
+          memberView.init();
         }
         break;
       default:
