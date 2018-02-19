@@ -24,7 +24,7 @@ var app = app || {};
         <li name="linkedInUrl" value=${member.linkedInUrl}>LinkedIn URL: ${member.linkedInUrl}</li>
         <li name="gitHubUrl" value="${member.gitHubUrl}">GitHub URL: ${member.gitHubUrl}</li>
         <li name="profileUrl"value="${member.profileUrl}">Profile URL: ${member.profileUrl}</li>
-        <li name="email" value="${member.email}">Email: ${member.email}</li>
+        <li name="email" value="${member.email}" >Email: ${member.email}</li>
       </ul>
       <button name="delete" value="${member._id}">Delete</button>
       <button name="update" value="${member._id}">Edit</button>
@@ -70,6 +70,39 @@ var app = app || {};
     })
   }
 
+  $("#add-member").on('click', (event) => {
+    $("#new-member-profile").remove();
+    $('#lName-input').after(`
+      <form id="new-member-profile" action="">
+      </label><input required name="firstName" placeholder="First Name" type="text">&nbsp;<input required type="text" name="lastName" placeholder="Last Name" ">
+      <li name="skills">Skills:<input name="skills" type="text" placeholder="Your skills separated by comma" value=""></li>
+      <li name="linkedInUrl">LinkedIn URL:<input name="linkedInUrl" type="url" value=""></li>
+      <li name="gitHubUrl">GitHub URL: <input name="gitHubUrl" type="url" value=""></li>
+      <li name="profileUrl">Profile URL: <input name="profileUrl" type="text" value=""></li>
+      <li name="email">Email:<input required name="email" type="email" value=""></li>
+    </ul>
+    <button id="add-commit" type="submit" value="submit">Save</button>
+    </form>
+    `);
+    $("#new-member-profile").on("submit", formSubmitListener);
+  });
+
+  let formSubmitListener = (event) => {
+    let newMember = {
+      "memberProfile": {}
+    };
+    $('#new-member-profile').find('input').each((idx, element) => {
+      newMember.memberProfile[element.getAttribute('name')] = element.value;
+    });
+    if ("skills" in newMember.memberProfile) {
+      newMember.memberProfile.skills = newMember.memberProfile.skills.split(',');
+    }
+    app.Member.addMember(newMember);
+    memberView.init();
+    $("#new-member-profile").remove();
+    event.preventDefault();
+  };
+
   $("#member-display").on('click', 'button', (event) => {
     let name = event.target.name;
     let id = event.target.value;
@@ -89,7 +122,7 @@ var app = app || {};
             "memberProfile": {}
           };
           $(`#${id}`).find('input').each((idx, element) => {
-            console.log(element.getAttribute('name') + ":"+ element.value);
+            console.log(element.getAttribute('name') + ":" + element.value);
             member.memberProfile[element.getAttribute('name')] = element.value;
           });
           if ("skills" in member.memberProfile) {
