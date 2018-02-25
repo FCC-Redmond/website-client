@@ -21,19 +21,21 @@ var app = app || {};
     callback(data);
   }).catch(err => console.error(errorCallback(err)));
 
-  Member.addMember = (member) => $.ajax({
-    "async": true,
-    "crossDomain": true,
-    "url": _API_URL_ + "/api/v0/members/add",
-    "method": "POST",
-    "headers": {
-      "Content-Type": "application/json",
-      "Cache-Control": "no-cache"
-    },
-    "processData": false,
-    "data": JSON.stringify(member),
-    "error": err => console.error(errorCallback(err))
-  }).done(function (response) {
+  Member.addMember = (member) => $.ajax(
+    {
+      "async": true,
+      "crossDomain": true,
+      "url": _API_URL_ + "/api/v0/members/add",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json",
+        "Cache-Control": "no-cache"
+      },
+      "processData": false,
+      "data": JSON.stringify(member),
+      "error": err => console.error(errorCallback(err))
+    }
+  ).done(function (response) {
     console.log(response);
   })
 
@@ -48,10 +50,10 @@ var app = app || {};
         "Cache-Control": "no-cache"
       },
       "processData": false,
-      "data": JSON.stringify(member)
+      data: JSON.stringify(member)
     })
-    .done(data => console.log(data))
-    .fail(err => errorCallback(err));
+      .then(data => console.log(data))
+      .catch(errorCallback);
 
   Member.getSkill = (skill, callback) => $.getJSON(_API_URL_ + '/api/v0/members?skills=' + encodeURIComponent(skill)).then(
     data => {
@@ -60,19 +62,19 @@ var app = app || {};
     }
   ).catch(err => console.error(errorCallback(err)));
 
-  Member.delete = (id, callback) =>
-    $.ajax({
-      "async": true,
-      "crossDomain": true,
-      "url": _API_URL_ + "/api/v0/members/" + id,
-      "method": "DELETE",
-      "headers": {
-        "Content-Type": "application/json",
-        "Cache-Control": "no-cache"
-      },
-      "processData": false,
-    })
-    .then(data => callback(data))
+  Member.delete = (id) =>
+  $.ajax({
+    "async": true,
+    "crossDomain": true,
+    "url": _API_URL_ + "/api/v0/members/" + id,
+    "method": "DELETE",
+    "headers": {
+      "Content-Type": "application/json",
+      "Cache-Control": "no-cache"
+    },
+    "processData": false,
+  })
+    .then(data => console.log(data))
     .catch(errorCallback);
 
   module.Member = Member;
