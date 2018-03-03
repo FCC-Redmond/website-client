@@ -174,17 +174,3 @@ var app = app || {};
   module.memberView = memberView;
 
 })(app);
-
-
-// let user = {
-// 	"memberProfile": {
-// 		"skills":["JavaScript", "NodeJs", "ExpressJs", "MongoDB"],
-// 		"lastName": "Kim",
-// 		"firstName": "Amber",
-// 		"linkedInUrl": "",
-// 		"gitHubUrl": "",
-// 		"profileUrl": "",
-// 		"email": "ambergkim10@gmail.com",
-// 		"_id": 5a839ea26aa4f73c79d8386e
-// 	}
-// }
