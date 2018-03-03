@@ -51,6 +51,7 @@ var app = app || {};
       </ul>
       <button name="delete" value="${id}">Delete</button>
       <button name="update" value="${id}">Update</button>
+      <button name="cancel" value="${id}">Cancel</button>
       `
     );
   };
@@ -132,6 +133,9 @@ var app = app || {};
           memberView.init();
         }
         break;
+      case "cancel":
+        memberView.init();
+        break;
       default:
         break;
     }
@@ -170,6 +174,8 @@ var app = app || {};
       }
     });
   });
+
+  $('#cancel')
 
   module.memberView = memberView;
 
