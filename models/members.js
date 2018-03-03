@@ -18,6 +18,7 @@ var app = app || {};
   }).catch(err => console.error(errorCallback(err)));
 
   Member.fetchMember = (lName, callback) => $.getJSON(_API_URL_ + '/api/v0/members/' + lName.toLowerCase()).then(data => {
+    console.log('member id:', data.data._id);
     callback(data);
   }).catch(err => console.error(errorCallback(err)));
 
