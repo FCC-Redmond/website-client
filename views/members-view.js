@@ -4,6 +4,38 @@ var app = app || {};
 
 (module => {
 
+  const opts = {
+    lines: 13, // The number of lines to draw
+    length: 38, // The length of each line
+    width: 17, // The line thickness
+    radius: 45, // The radius of the inner circle
+    scale: 1, // Scales overall size of the spinner
+    corners: 1, // Corner roundness (0..1)
+    color: '#OOOOOO', // CSS color or array of colors
+    fadeColor: 'transparent', // CSS color or array of colors
+    opacity: 0.25, // Opacity of the lines
+    rotate: 0, // The rotation offset
+    direction: 1, // 1: clockwise, -1: counterclockwise
+    speed: 1, // Rounds per second
+    trail: 60, // Afterglow percentage
+    fps: 20, // Frames per second when using setTimeout() as a fallback in IE 9
+    zIndex: 2e9, // The z-index (defaults to 2000000000)
+    className: 'spinner', // The CSS class to assign to the spinner
+    top: '50%', // Top position relative to parent
+    left: '50%', // Left position relative to parent
+    shadow: 'none', // Box-shadow for the lines
+    position: 'absolute' // Element positioning
+  };
+  const spinner = new Spinner(opts);
+  //ajax handlers
+  $(document).ajaxStart(function () {
+    let target = $("body")[0];
+    spinner.spin(target);
+  });
+
+  $(document).ajaxStop(function () {
+    spinner.stop();
+  });
   const memberView = {};
 
   memberView.filterError = () => {
@@ -66,9 +98,9 @@ var app = app || {};
   }
 
   memberView.init = () => {
-    app.Member.fetchAll(data => {
+    app.Member.fetchAll().then(data => {
       memberView.displayMultiple(data);
-    })
+    }).catch(err => console.log(err));
   }
 
   $("#add-member").on('click', (event) => {
@@ -82,11 +114,17 @@ var app = app || {};
       <li name="profileUrl">Profile URL: <input name="profileUrl" type="text" value=""></li>
       <li name="email">Email:<input required name="email" type="email" value=""></li>
     </ul>
+    <button id="add-cancel" type="cancel" value="cancel">Cancel</button>
     <button id="add-commit" type="submit" value="submit">Save</button>
     </form>
     `);
     $("#new-member-profile").on("submit", formSubmitListener);
+    $('#add-cancel').on('click', addFormCancelListener);
   });
+
+  let addFormCancelListener = (event) => {
+    $('#new-member-profile').remove();
+  };
 
   let formSubmitListener = (event) => {
     let newMember = {
@@ -98,8 +136,10 @@ var app = app || {};
     if ("skills" in newMember.memberProfile) {
       newMember.memberProfile.skills = newMember.memberProfile.skills.split(',');
     }
-    app.Member.addMember(newMember);
-    memberView.init();
+    app.Member.addMember(newMember).then(response => {
+      console.log(response);
+      memberView.init();
+    }).catch(err => console.log(err));
     $("#new-member-profile").remove();
     event.preventDefault();
   };
@@ -109,9 +149,11 @@ var app = app || {};
     let id = event.target.value;
     switch (name) {
       case "delete":
-        app.Member.delete(id, (data) => {
+        app.Member.delete(id).then((data) => {
           console.log(data);
           memberView.init();
+        }).catch(err => {
+          console.log(err);
         });
         break;
       case "update":
@@ -129,8 +171,13 @@ var app = app || {};
           if ("skills" in member.memberProfile) {
             member.memberProfile.skills = member.memberProfile.skills.split(',');
           }
-          app.Member.update(member, id.toString());
-          memberView.init();
+          app.Member.update(member, id.toString()).then(data => {
+            console.log(data);
+            memberView.init();
+          }).catch(err => {
+            console.log(err);
+          });;
+
         }
         break;
       case "cancel":
@@ -147,14 +194,14 @@ var app = app || {};
       memberView.init();
       return;
     }
-    app.Member.getSkill(skill, (data) => {
+    app.Member.getSkill(skill).then((data) => {
       if (data.success === false) {
         $("#member-display").empty();
         memberView.filterError();
       } else if (data.success === true) {
         memberView.displayMultiple(data);
       }
-    });
+    }).catch(err => console.log(err));
   });
 
   $("#lName-input").change(() => {
@@ -163,7 +210,7 @@ var app = app || {};
       memberView.init();
       return;
     }
-    app.Member.fetchMember(lName, (data) => {
+    app.Member.fetchMember(lName).then((data) => {
       if (data.success === false) {
         $("#member-display").empty();
         memberView.filterError();
@@ -172,7 +219,7 @@ var app = app || {};
         $("#member-display").empty();
         memberView.displayMember(member);
       }
-    });
+    }).catch(err => console.log(err));
   });
 
   $('#cancel')

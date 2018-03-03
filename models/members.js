@@ -10,71 +10,110 @@ var app = app || {};
   const Member = {};
 
   function errorCallback(err) {
-    console.error(err);
+    console.log(err);
   }
 
-  Member.fetchAll = (callback) => $.getJSON(_API_URL_ + '/api/v0/members').then(data => {
-    callback(data);
-  }).catch(err => console.error(errorCallback(err)));
+  Member.fetchAll = () => {
+    return new Promise((resolve, reject) => {
+      $.getJSON(_API_URL_ + '/api/v0/members').then(data => {
+        resolve(data);
+      }).catch(err => {
+        console.log(errorCallback(err));
+        reject(err);
+      });
+    });
 
-  Member.fetchMember = (lName, callback) => $.getJSON(_API_URL_ + '/api/v0/members/' + lName.toLowerCase()).then(data => {
-    console.log('member id:', data.data._id);
-    callback(data);
-  }).catch(err => console.error(errorCallback(err)));
+  }
 
-  Member.addMember = (member) => $.ajax({
-    "async": true,
-    "crossDomain": true,
-    "url": _API_URL_ + "/api/v0/members/add",
-    "method": "POST",
-    "headers": {
-      "Content-Type": "application/json",
-      "Cache-Control": "no-cache"
-    },
-    "processData": false,
-    "data": JSON.stringify(member),
-    "error": err => console.error(errorCallback(err))
-  }).done(function (response) {
-    console.log(response);
-  })
+  Member.fetchMember = (lName) => {
+    return new Promise((resolve, reject) => {
+      $.getJSON(_API_URL_ + '/api/v0/members/' + lName.toLowerCase()).then(data => {
+        console.log('member id:', data.data._id);
+        resolve(data);
+      }).catch(err => {
+        console.log(errorCallback(err));
+        reject(err);
+      });
+    });
+  }
 
-  Member.update = (member, id) =>
-    $.ajax({
-      "async": true,
-      "crossDomain": true,
-      "url": _API_URL_ + "/api/v0/members/" + id,
-      "method": "PUT",
-      "headers": {
-        "Content-Type": "application/json",
-        "Cache-Control": "no-cache"
-      },
-      "processData": false,
-      "data": JSON.stringify(member)
-    })
-    .done(data => console.log(data))
-    .fail(err => errorCallback(err));
+  Member.addMember = (member) => {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        "async": true,
+        "crossDomain": true,
+        "url": _API_URL_ + "/api/v0/members/add",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache"
+        },
+        "processData": false,
+        "data": JSON.stringify(member),
+        "error": err => {
+          console.log(errorCallback(err));;
+          reject(err);
+        }
+      }).done(function (response) {
+        resolve(response);
+      })
+    });
+  }
 
-  Member.getSkill = (skill, callback) => $.getJSON(_API_URL_ + '/api/v0/members?skills=' + encodeURIComponent(skill)).then(
-    data => {
-      callback(data);
-      console.log(data);
-    }
-  ).catch(err => console.error(errorCallback(err)));
+  Member.update = (member, id) => {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+          "async": true,
+          "crossDomain": true,
+          "url": _API_URL_ + "/api/v0/members/" + id,
+          "method": "PUT",
+          "headers": {
+            "Content-Type": "application/json",
+            "Cache-Control": "no-cache"
+          },
+          "processData": false,
+          "data": JSON.stringify(member)
+        })
+        .done(data => resolve(data))
+        .fail(err => reject(err));
+    });
+  }
 
-  Member.delete = (id, callback) =>
-    $.ajax({
-      "async": true,
-      "crossDomain": true,
-      "url": _API_URL_ + "/api/v0/members/" + id,
-      "method": "DELETE",
-      "headers": {
-        "Content-Type": "application/json",
-        "Cache-Control": "no-cache"
-      },
-      "processData": false,
-    })
-    .then(data => callback(data))
-    .catch(errorCallback);
+  Member.getSkill = (skill) => {
+    return new Promise((resolve, reject) => {
+      $.getJSON(_API_URL_ + '/api/v0/members?skills=' + encodeURIComponent(skill)).then(
+        data => {
+          console.log(data);
+          resolve(data);
+        }
+      ).catch(err => {
+        console.log(errorCallback(err));
+        reject(err);
+      });
+    });
+  }
+
+  Member.delete = (id) => {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+          "async": true,
+          "crossDomain": true,
+          "url": _API_URL_ + "/api/v0/members/" + id,
+          "method": "DELETE",
+          "headers": {
+            "Content-Type": "application/json",
+            "Cache-Control": "no-cache"
+          },
+          "processData": false,
+        })
+        .then(data => resolve(data))
+        .catch(err => {
+          errorCallback(err);
+          reject(err);
+        });
+    });
+  }
+
 
   module.Member = Member;
 
