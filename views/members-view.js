@@ -106,25 +106,47 @@ var app = app || {};
   $("#add-member").on('click', (event) => {
     $("#new-member-profile").remove();
     $('#lName-input').after(`
-      <form id="new-member-profile" action="">
-      </label><input required name="firstName" placeholder="First Name" type="text">&nbsp;<input required type="text" name="lastName" placeholder="Last Name" ">
-      <li name="skills">Skills:<input name="skills" type="text" placeholder="Your skills separated by comma" value=""></li>
-      <li name="linkedInUrl">LinkedIn URL:<input name="linkedInUrl" type="url" value=""></li>
-      <li name="gitHubUrl">GitHub URL: <input name="gitHubUrl" type="url" value=""></li>
-      <li name="profileUrl">Profile URL: <input name="profileUrl" type="text" value=""></li>
-      <li name="email">Email:<input required name="email" type="email" value=""></li>
-    </ul>
-    <button id="add-cancel" type="cancel" value="cancel">Cancel</button>
-    <button id="add-commit" type="submit" value="submit">Save</button>
-    </form>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <h2>Create Profile</h2>
+        </div>
+        <div class="modal-body">
+          <form id="new-member-profile" action="">
+          <input required name="firstName" placeholder="First Name" type="text">&nbsp;<input required type="text" name="lastName" placeholder="Last Name" ">
+          <ul>
+            <li name="skills">Skills:<input name="skills" type="text" placeholder="Your skills separated by comma" value=""></li>
+            <li name="linkedInUrl">LinkedIn URL:<input name="linkedInUrl" type="url" value=""></li>
+            <li name="gitHubUrl">GitHub URL: <input name="gitHubUrl" type="url" value=""></li>
+            <li name="profileUrl">Profile URL: <input name="profileUrl" type="text" value=""></li>
+            <li name="email">Email:<input required name="email" type="email" value=""></li>
+          </ul>
+          <button id="add-commit" type="submit" value="submit">Save</button>
+        </form>
+        </div>
+      </div>
+    </div>
     `);
     $("#new-member-profile").on("submit", formSubmitListener);
-    $('#add-cancel').on('click', addFormCancelListener);
+    let modal = $('#myModal')[0];
+    modal.style.display = "block";
+    $('span.close').on('click', (event) => {
+      modal.style.display = "none";
+      event.preventDefault();
+    });
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
   });
 
-  let addFormCancelListener = (event) => {
-    $('#new-member-profile').remove();
-  };
+
+
+
 
   let formSubmitListener = (event) => {
     let newMember = {
@@ -141,6 +163,8 @@ var app = app || {};
       memberView.init();
     }).catch(err => console.log(err));
     $("#new-member-profile").remove();
+    let modal = $('#myModal')[0];
+    modal.style.display = "none";
     event.preventDefault();
   };
 
