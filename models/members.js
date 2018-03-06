@@ -15,25 +15,38 @@ var app = app || {};
 
   Member.fetchAll = () => {
     return new Promise((resolve, reject) => {
-      $.getJSON(_API_URL_ + '/api/v0/members').then(data => {
-        resolve(data);
-      }).catch(err => {
-        console.log(errorCallback(err));
-        reject(err);
-      });
+      $.ajax({
+        "async": true,
+        "crossDomain": true,
+        "url": _API_URL_ + "/api/v0/members/",
+        "method": "GET",
+        "headers": {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache"
+        },
+        "processData": false
+      })
+      .done(data => resolve(data))
+      .fail(err => reject(err));
     });
 
   }
 
   Member.fetchMember = (lName) => {
     return new Promise((resolve, reject) => {
-      $.getJSON(_API_URL_ + '/api/v0/members/' + lName.toLowerCase()).then(data => {
-        console.log('member id:', data.data._id);
-        resolve(data);
-      }).catch(err => {
-        console.log(errorCallback(err));
-        reject(err);
-      });
+      $.ajax({
+        "async": true,
+        "crossDomain": true,
+        "url": _API_URL_ + "/api/v0/members/" + lName.toLowerCase(),
+        "method": "GET",
+        "headers": {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache"
+        },
+        "processData": false,
+      })
+      .done(data => resolve(data))
+      .fail(err => reject(err));
     });
   }
 
@@ -55,6 +68,7 @@ var app = app || {};
           reject(err);
         }
       }).done(function (response) {
+        console.log(JSON.stringify(member));
         resolve(response);
       })
     });
@@ -81,15 +95,19 @@ var app = app || {};
 
   Member.getSkill = (skill) => {
     return new Promise((resolve, reject) => {
-      $.getJSON(_API_URL_ + '/api/v0/members?skills=' + encodeURIComponent(skill)).then(
-        data => {
-          console.log(data);
-          resolve(data);
-        }
-      ).catch(err => {
-        console.log(errorCallback(err));
-        reject(err);
-      });
+      $.ajax({
+        "async": true,
+        "crossDomain": true,
+        "url": _API_URL_ + "/api/v0/members?skills=" + encodeURIComponent(skill),
+        "method": "GET",
+        "headers": {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache"
+        },
+        "processData": false,
+      })
+      .done(data => resolve(data))
+      .fail(err => reject(err));
     });
   }
 
@@ -118,17 +136,3 @@ var app = app || {};
   module.Member = Member;
 
 })(app);
-
-
-// let user = {
-// 	"memberProfile": {
-// 		"skills":["JavaScript", "NodeJs", "ExpressJs", "MongoDB"],
-// 		"lastName": "Kim",
-// 		"firstName": "Amber",
-// 		"linkedInUrl": "",
-// 		"gitHubUrl": "",
-// 		"profileUrl": "",
-// 		"email": "ambergkim10@gmail.com",
-// 		"_id": 5a839ea26aa4f73c79d8386e
-// 	}
-// }
