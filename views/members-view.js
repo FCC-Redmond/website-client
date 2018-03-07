@@ -91,15 +91,14 @@ var app = app || {};
 
   memberView.displayMultiple = (memberArr) => {
     $("#member-display").empty();
-    let member = memberArr.data;
-    for (var i = 0; i < member.length; i++) {
-      memberView.displayMember(member[i]);
+    for (var i = 0; i < memberArr.length; i++) {
+      memberView.displayMember(memberArr[i]);
     }
   }
 
   memberView.init = () => {
     app.Member.fetchAll().then(data => {
-      memberView.displayMultiple(data);
+      memberView.displayMultiple(data.data);
     }).catch(err => console.log(err));
   }
 
@@ -239,9 +238,9 @@ var app = app || {};
         $("#member-display").empty();
         memberView.filterError();
       } else if (data.success === true) {
-        let member = data.data;
+        let memberArr = data.data;
         $("#member-display").empty();
-        memberView.displayMember(member);
+        memberView.displayMultiple(memberArr);
       }
     }).catch(err => console.log(err));
   });
