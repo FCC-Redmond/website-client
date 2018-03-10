@@ -44,6 +44,12 @@ var app = app || {};
     );
   }
 
+  memberView.displayMultiple = (memberArr) => {
+    memberArr.forEach((member) => {
+      memberView.displayMember(member);
+    });
+  }
+
   memberView.displayMember = (member) => {
     let skills = member.skills.join(' | ');
 
@@ -88,18 +94,50 @@ var app = app || {};
     );
   };
 
-
-  memberView.displayMultiple = (memberArr) => {
-    $("#member-display").empty();
-    for (var i = 0; i < memberArr.length; i++) {
-      memberView.displayMember(memberArr[i]);
+  let loginStatusCallback = (response) => {
+    switch (response.status) {
+      case 'not_authorized': console.log(response); fbLogin(); break;
+      case 'connected': loggedIn(response); console.log(response); break;
+      default: console.log(response); fbLogin(); break;
     }
-  }
+  };
 
-  memberView.init = () => {
+  let loggedIn = (response) => {
     app.Member.fetchAll().then(data => {
       memberView.displayMultiple(data.data);
     }).catch(err => console.log(err));
+  };
+
+  let fbLogin = () => {
+    FB.login((response) => {
+      loginStatusCallback(response);
+    });
+  }
+
+  memberView.init = () => {
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId: '1326170657515226',
+        cookie: true,
+        xfbml: true,
+        version: 'v2.8'
+      });
+      //when loading Facebook sdk async, all references to FB should be within the init
+      FB.getLoginStatus((response) => {
+        loginStatusCallback(response);
+      });
+
+    };
+
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { return; }
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+
   }
 
   $("#add-member").on('click', (event) => {
