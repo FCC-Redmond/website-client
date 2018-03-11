@@ -96,11 +96,28 @@ var app = app || {};
 
   let loginStatusCallback = (response) => {
     switch (response.status) {
-      case 'not_authorized': console.log(response); fbLogin(); break;
-      case 'connected': loggedIn(response); console.log(response); break;
-      default: console.log(response); fbLogin(); break;
+      case 'not_authorized':
+        notAuthorized(response);
+        console.log(response);
+        break;
+      case 'connected':
+        loggedIn(response);
+        console.log(response);
+        break;
+      case 'unknown':
+        notAuthorized(response);
+        console.log(response);
+        break;
+      default:
+        console.log(response);
+        fbLogin();
+        break;
     }
   };
+
+  let notAuthorized = (response) => {
+    $("#member-display").empty();
+  }
 
   let loggedIn = (response) => {
     app.Member.fetchAll().then(data => {
@@ -127,12 +144,19 @@ var app = app || {};
         loginStatusCallback(response);
       });
 
+      //FB.Event.subscribe('auth.authResponseChange', loginStatusCallback);
+
+      FB.Event.subscribe('auth.statusChange', loginStatusCallback);
+
     };
 
     (function (d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) { return; }
-      js = d.createElement(s); js.id = id;
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
       js.src = "https://connect.facebook.net/en_US/sdk.js";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
