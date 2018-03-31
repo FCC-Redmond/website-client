@@ -1,0 +1,51 @@
+* {
+  font-family: 'Alegreya', serif;
+  font-size: 14px;
+}
+
+:root {
+  --dark-bg-color: #294653;
+  --light-bg-color: #ffffff;
+  --light-text: #ffffff;
+  --dark-text: #000000;
+  --peach-text: #e8e2cf;
+  --dark-header: #294653;
+  --link-color: #65b2b8;
+  --accent-color: #91ab6d;
+  --cta-color: #f0e94e;
+}
+
+section {
+  height: 60vh;
+}
+
+nav {
+  width: 95%;
+  position: absolute;
+  text-align: center;
+  padding: 10px;
+  color: var(--light-text);
+  font-size: 2em;
+}
+
+h1, h2 {
+  font-family: 'Alegreya Sans', sans-serif;
+  text-transform: uppercase;
+  font-weight: 100;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  color: var(--dark-text);
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 100;
+  color: var(--peach-text);
+}
+

@@ -1,0 +1,16 @@
+.cta-layout button {
+  border: solid 3px var(--cta-color);
+  background-color: var(--dark-bg-color);
+  padding: 15px 10px;
+  font-size: 2em;
+  color: var(--light-text);
+  font-weight: 100;
+  text-transform: uppercase;
+}
+
+.cta-layout .fa-caret-down {
+  font-size: 28px;
+  margin: 35% auto 0;
+  position: relative;
+  color: var(--accent-color);
+}
