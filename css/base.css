@@ -49,3 +49,11 @@ h3 {
   color: var(--peach-text);
 }
 
+@media only screen and (orientation: landscape) {
+  .section {
+    height: 100vh;
+  }
+  h1, h3 {
+    margin: 5px;
+  }
+}

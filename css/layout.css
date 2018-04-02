@@ -9,3 +9,12 @@
   text-align: center;
   padding: 35% 10% 5%;
 }
+
+@media only screen and (orientation: landscape) {
+  .cta-layout {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 10% 10% 3%;
+  }
+}

@@ -14,3 +14,13 @@
   position: relative;
   color: var(--accent-color);
 }
+
+@media only screen and (orientation: landscape) {
+  .cta-layout button {
+    width: 100%;
+    padding: 10px;
+  }
+  .cta-layout .fa-caret-down {
+    margin: 10px auto 0;
+  }
+}
