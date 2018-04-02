@@ -8,10 +8,16 @@
   text-transform: uppercase;
 }
 
+.cta-layout h1, h3 {
+  margin: 5px;
+}
+
 .cta-layout .fa-caret-down {
   font-size: 28px;
-  margin: 35% auto 0;
-  position: relative;
+  margin: 0 auto;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
   color: var(--accent-color);
 }
 
@@ -20,7 +26,51 @@
     width: 100%;
     padding: 10px;
   }
-  .cta-layout .fa-caret-down {
-    margin: 10px auto 0;
+}
+
+@media only screen and (min-width: 736px) and (orientation: landscape) {
+  .cta-layout button {
+    margin-top: 10px;
+  }
+}
+
+@media only screen and (min-width: 375px) and (orientation: portrait) {
+  .cta-layout h1, h3 {
+    margin: 5px;
+  }
+  .cta-layout button {
+    margin: 10px;
+  }
+}
+
+@media only screen and (min-width: 812px) and (orientation: landscape) {
+}
+
+@media only screen and (min-width: 414px) and (orientation: portrait) {
+  .cta-layout h1, h3 {
+    margin: 5px;
+  }
+  .cta-layout button {
+    margin: 10px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (orientation: portrait) {
+  .cta-layout {
+    padding-top: 25%;
+  }
+  .cta-layout button {
+    width: 60%;
+    margin: 5% auto;
+  }
+}
+
+@media only screen and (min-width: 1024px) and (orientation: landscape) {
+  .cta-layout {
+    padding-top: 20%;
+  }
+  .cta-layout button {
+    margin: 5% auto;
+    width: 60%;
   }
 }
