@@ -35,3 +35,9 @@ F. Make use of Frequent commmits, good, informative messages, and no working dir
 4. Design ONLY for mobile for now. See the 'wireframes/fcc-redmond-profile-wireframe.png' file
 5. You may use your own colors, fonts, etc.
 6. The wireframes are a starting point. You don't have to build it exactly.
+
+# Sign up for FreeCodeCamp.org!
+[Start Learning Full Stack JavaScript Here](https://freecodecamp.org)
+
+# SPECIAL THANKS:
+* Font Awesome for the awesome fonts!
