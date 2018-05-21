@@ -36,6 +36,25 @@ F. Make use of Frequent commmits, good, informative messages, and no working dir
 5. You may use your own colors, fonts, etc.
 6. The wireframes are a starting point. You don't have to build it exactly.
 
+# ASSIGNMENT 3: JSON & API INTRO
+1. Read: https://restfulapi.net/
+2. Read: http://www.bmc.com/blogs/rest-vs-crud-whats-the-difference/
+3. Install on Chrome: https://github.com/callumlocke/json-formatter
+4. Take a look at one of our API endpoints: https://fccredmond.herokuapp.com/api/v0/members/
+
+We can do CRUD operations on this endpoint.
+  * Create https://fccredmond.herokuapp.com/api/v0/members/
+  * Read https://fccredmond.herokuapp.com/api/v0/members/
+  * Read with filtering https://fccredmond.herokuapp.com/api/v0/members/:lname
+  Example:
+  ```
+  https://fccredmond.herokuapp.com/api/v0/members/kim
+  ```
+  * Update https://fccredmond.herokuapp.com/api/v0/members/:id
+  * Delete https://fccredmond.herokuapp.com/api/v0/members/:id
+
+5. Create your own account so your information displays on our home page. Make sure to include the link to the photo you used in the html profile page you created! (look for or ask in Slack for instructions).
+
 # Sign up for FreeCodeCamp.org!
 [Start Learning Full Stack JavaScript Here](https://freecodecamp.org)
 
