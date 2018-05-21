@@ -49,14 +49,31 @@ var app = app || {};
 
     $("#member-display").append(
       `
-      <div id="${member._id}">
+      <div id="${member._id}" class="member-info">
+      <img class="avatar" src="${member.imageUrl}" alt="amber kim" />
       <h2><span name="firstName" value=${member.firstName}>${member.firstName}</span>&nbsp;<span name="lastName" value=${member.lastName}>${member.lastName}</span></h2>
+      <p class="skills">${skills}</p>
       <ul>
-        <li name="skills" value=${member.skills}>Skills: ${skills}</li>
-        <li name="linkedInUrl" value=${member.linkedInUrl}>LinkedIn URL: ${member.linkedInUrl}</li>
-        <li name="gitHubUrl" value="${member.gitHubUrl}">GitHub URL: ${member.gitHubUrl}</li>
-        <li name="profileUrl"value="${member.profileUrl}">Profile URL: ${member.profileUrl}</li>
-        <li name="email" value="${member.email}" >Email: ${member.email}</li>
+        <li name="profileUrl" value="${member.profileUrl}">
+          <a href="${member.profileUrl}">
+            Profile: ${member.profileUrl}
+          </a>
+        </li>
+        <li name="portfolio" value="${member.portfolioUrl}">
+          <a href="${member.portfolioUrl}">
+            Portfolio: ${member.portfolioUrl}
+          </a>
+        </li>
+        <li name="gitHubUrl" value="${member.gitHubUrl}">
+          <a href="${member.gitHubUrl}">
+            GitHub: ${member.gitHubUrl}
+          </a>
+        </li>
+        <li name="linkedInUrl" value="${member.linkedInUrl}">
+          <a href="${member.linkedInUrl}">
+            LinkedIn: ${member.linkedInUrl}
+          </a>
+        </li>
       </ul>
       <button name="delete" value="${member._id}">Delete</button>
       <button name="update" value="${member._id}">Edit</button>
@@ -74,12 +91,31 @@ var app = app || {};
     $(`#${id}`).empty();
     $(`#${id}`).append(
       `
-      <h2><input name="firstName"  type="text" value="${member.firstName}">&nbsp;<input type="text"  name="lastName" value="${member.lastName}"></h2>
-        <li name="skills">Skills:<input name="skills" type="text" value="${member.skills}"></li>
-        <li name="linkedInUrl">LinkedIn URL:<input name="linkedInUrl" type="text" value="${member.linkedInUrl}"></li>
-        <li name="gitHubUrl">GitHub URL: <input name="gitHubUrl" type="text" value="${member.gitHubUrl}"></li>
-        <li name="profileUrl">Profile URL: <input name="profileUrl" type="text" value="${member.profileUrl}"></li>
-        <li name="email">Email:<input name="email" type="text" value="${member.email}"></li>
+      <div id="${member._id}" class="member-info">
+      <img class="avatar" src="${member.imageUrl}" alt="amber kim" />
+      <h2><span name="firstName" value=${member.firstName}>${member.firstName}</span>&nbsp;<span name="lastName" value=${member.lastName}>${member.lastName}</span></h2>
+      <p class="skills">${skills}</p>
+      <ul>
+        <li name="profileUrl" value="${member.profileUrl}">
+          <a href="${member.profileUrl}">
+            Profile: ${member.profileUrl}
+          </a>
+        </li>
+        <li name="portfolio" value="${member.portfolioUrl}">
+          <a href="${member.portfolioUrl}">
+            Portfolio: ${member.portfolioUrl}
+          </a>
+        </li>
+        <li name="gitHubUrl" value="${member.gitHubUrl}">
+          <a href="${member.gitHubUrl}">
+            GitHub: ${member.gitHubUrl}
+          </a>
+        </li>
+        <li name="linkedInUrl" value="${member.linkedInUrl}">
+          <a href="${member.linkedInUrl}">
+            LinkedIn: ${member.linkedInUrl}
+          </a>
+        </li>
       </ul>
       <button name="delete" value="${id}">Delete</button>
       <button name="update" value="${id}">Update</button>
@@ -90,8 +126,11 @@ var app = app || {};
 
 
   memberView.displayMultiple = (memberArr) => {
+    console.log('in view display multiple', memberArr);
+    console.log('memberArr length', memberArr.length);
     $("#member-display").empty();
     for (var i = 0; i < memberArr.length; i++) {
+      console.log('in view display mult for loop member', memberArr[i]);
       memberView.displayMember(memberArr[i]);
     }
   }
@@ -212,7 +251,9 @@ var app = app || {};
   });
 
   $("#skill-input").change(() => {
+    console.log('skill input change');
     let skill = $("#skill-input").val();
+    console.log('skill input value', skill);
     if (!skill || skill.length == 0) {
       memberView.init();
       return;
@@ -222,7 +263,8 @@ var app = app || {};
         $("#member-display").empty();
         memberView.filterError();
       } else if (data.success === true) {
-        memberView.displayMultiple(data);
+        console.log('get skill data', data.data);
+        memberView.displayMultiple(data.data);
       }
     }).catch(err => console.log(err));
   });

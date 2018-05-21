@@ -21,6 +21,59 @@
   color: var(--accent-color);
 }
 
+.member-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+
+.member-info h2 {
+  margin: 0;
+}
+
+.member-info h2 span {
+  font-size: 1.5em;
+}
+
+.member-info ul {
+  text-align: left;
+}
+
+.skills {
+  font-size: 0.9em;
+  text-transform: uppercase;
+  margin: 0 5% 0;
+}
+
+.avatar {
+  width: 250px;
+  height: 250px;
+  border-radius: 5%;
+  margin: 0 auto;
+  border: solid 2px black;
+}
+
+#filter-section {
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+}
+
+#filter-section button {
+  background-color: var(--dark-bg-color);
+  color: white;
+  padding: 1em 1em;
+  margin-bottom: 1em;
+}
+
+#filter-section input {
+  margin-bottom: 1em;
+  border: solid 1px black;
+  padding: 1em 1em;
+}
+
 @media only screen and (orientation: landscape) {
   .cta-layout button {
     width: 100%;
@@ -72,5 +125,28 @@
   .cta-layout button {
     margin: 5% auto;
     width: 60%;
+  }
+
+  #filter-section {
+    flex-direction: row;
+  }
+
+  #filter-section button {
+    margin-right: 1em;
+  }
+  
+  #filter-section input {
+    margin-right: 1em;
+  }
+
+  .member-info {
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-align: center; */
+    width: 20%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
   }
 }

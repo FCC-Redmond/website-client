@@ -101,7 +101,9 @@ var app = app || {};
           },
           "processData": false,
         })
-        .done(data => resolve(data))
+        .done(data => {
+          resolve(data);
+        })
         .fail(err => reject(err));
     });
   }
