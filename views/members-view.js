@@ -49,14 +49,31 @@ var app = app || {};
 
     $("#member-display").append(
       `
-      <div id="${member._id}">
+      <div id="${member._id}" class="member-info">
+      <img class="avatar" src="${member.imageUrl}" alt="amber kim" />
       <h2><span name="firstName" value=${member.firstName}>${member.firstName}</span>&nbsp;<span name="lastName" value=${member.lastName}>${member.lastName}</span></h2>
+      <p class="skills">${skills}</p>
       <ul>
-        <li name="skills" value=${member.skills}>Skills: ${skills}</li>
-        <li name="linkedInUrl" value=${member.linkedInUrl}>LinkedIn URL: ${member.linkedInUrl}</li>
-        <li name="gitHubUrl" value="${member.gitHubUrl}">GitHub URL: ${member.gitHubUrl}</li>
-        <li name="profileUrl"value="${member.profileUrl}">Profile URL: ${member.profileUrl}</li>
-        <li name="email" value="${member.email}" >Email: ${member.email}</li>
+        <li name="profileUrl" value="${member.profileUrl}">
+          <a href="${member.profileUrl}">
+            Profile: ${member.profileUrl}
+          </a>
+        </li>
+        <li name="portfolio" value="${member.portfolioUrl}">
+          <a href="${member.portfolioUrl}">
+            Portfolio: ${member.portfolioUrl}
+          </a>
+        </li>
+        <li name="gitHubUrl" value="${member.gitHubUrl}">
+          <a href="${member.gitHubUrl}">
+            GitHub: ${member.gitHubUrl}
+          </a>
+        </li>
+        <li name="linkedInUrl" value="${member.linkedInUrl}">
+          <a href="${member.linkedInUrl}">
+            LinkedIn: ${member.linkedInUrl}
+          </a>
+        </li>
       </ul>
       <button name="delete" value="${member._id}">Delete</button>
       <button name="update" value="${member._id}">Edit</button>
