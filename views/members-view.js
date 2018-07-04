@@ -50,33 +50,35 @@ var app = app || {};
     $("#member-display").append(
       `
       <div id="${member._id}" class="member-info">
-      <img class="avatar" src="${member.imageUrl}" alt="amber kim" />
-      <h2><span name="firstName" value=${member.firstName}>${member.firstName}</span>&nbsp;<span name="lastName" value=${member.lastName}>${member.lastName}</span></h2>
-      <p class="skills">${skills}</p>
-      <ul>
-        <li name="profileUrl" value="${member.profileUrl}">
-          <a href="${member.profileUrl}">
-            Profile: ${member.profileUrl}
-          </a>
-        </li>
-        <li name="portfolio" value="${member.portfolioUrl}">
-          <a href="${member.portfolioUrl}">
-            Portfolio: ${member.portfolioUrl}
-          </a>
-        </li>
-        <li name="gitHubUrl" value="${member.gitHubUrl}">
-          <a href="${member.gitHubUrl}">
-            GitHub: ${member.gitHubUrl}
-          </a>
-        </li>
-        <li name="linkedInUrl" value="${member.linkedInUrl}">
-          <a href="${member.linkedInUrl}">
-            LinkedIn: ${member.linkedInUrl}
-          </a>
-        </li>
-      </ul>
-      <button name="delete" value="${member._id}">Delete</button>
-      <button name="update" value="${member._id}">Edit</button>
+        <img class="avatar" src="${member.imageUrl}" alt="amber kim" />
+        <div class="member-details">
+          <h2><span name="firstName" value=${member.firstName}>${member.firstName}</span>&nbsp;<span name="lastName" value=${member.lastName}>${member.lastName}</span></h2>
+          <p class="skills">${skills}</p>
+          <ul>
+            <li name="profileUrl" value="${member.profileUrl}">
+              <a href="${member.profileUrl}">
+                <i class="fas fa-user-circle"></i>
+              </a>
+            </li>
+            <li name="portfolio" value="${member.portfolioUrl}">
+              <a href="${member.portfolioUrl}">
+                <i class="fas fa-book"></i>
+              </a>
+            </li>
+            <li name="gitHubUrl" value="${member.gitHubUrl}">
+              <a href="${member.gitHubUrl}">
+                <i class="fab fa-github"></i>
+              </a>
+            </li>
+            <li name="linkedInUrl" value="${member.linkedInUrl}">
+              <a href="${member.linkedInUrl}">
+                <i class="fab fa-linkedin-in"></i>
+             </a>
+            </li>
+          </ul>
+          <button name="delete" value="${member._id}">Delete</button>
+          <button name="update" value="${member._id}">Edit</button>
+          </div>
       </div>
       `
     );
@@ -93,33 +95,36 @@ var app = app || {};
       `
       <div id="${member._id}" class="member-info">
       <img class="avatar" src="${member.imageUrl}" alt="amber kim" />
-      <h2><span name="firstName" value=${member.firstName}>${member.firstName}</span>&nbsp;<span name="lastName" value=${member.lastName}>${member.lastName}</span></h2>
-      <p class="skills">${skills}</p>
-      <ul>
-        <li name="profileUrl" value="${member.profileUrl}">
-          <a href="${member.profileUrl}">
-            Profile: ${member.profileUrl}
-          </a>
-        </li>
-        <li name="portfolio" value="${member.portfolioUrl}">
-          <a href="${member.portfolioUrl}">
-            Portfolio: ${member.portfolioUrl}
-          </a>
-        </li>
-        <li name="gitHubUrl" value="${member.gitHubUrl}">
-          <a href="${member.gitHubUrl}">
-            GitHub: ${member.gitHubUrl}
-          </a>
-        </li>
-        <li name="linkedInUrl" value="${member.linkedInUrl}">
-          <a href="${member.linkedInUrl}">
-            LinkedIn: ${member.linkedInUrl}
-          </a>
-        </li>
-      </ul>
-      <button name="delete" value="${id}">Delete</button>
-      <button name="update" value="${id}">Update</button>
-      <button name="cancel" value="${id}">Cancel</button>
+      <div class="member-details">
+        <h2><span name="firstName" value=${member.firstName}>${member.firstName}  </span>&nbsp;<span name="lastName" value=${member.lastName}>${member.lastName}</span></h2>
+          <p class="skills">${skills}</p>
+        <ul>
+          <li name="profileUrl" value="${member.profileUrl}">
+            <a href="${member.profileUrl}">
+              <i class="fas fa-user-circle"></i>
+           </a>
+          </li>
+          <li name="portfolio" value="${member.portfolioUrl}">
+            <a href="${member.portfolioUrl}">
+              <i class="fas fa-book"></i>
+            </a>
+          </li>
+          <li name="gitHubUrl" value="${member.gitHubUrl}">
+            <a href="${member.gitHubUrl}">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li name="linkedInUrl" value="${member.linkedInUrl}">
+              <a href="${member.linkedInUrl}">
+                <i class="fab fa-linkedin-in"></i>
+             </a>
+            </li>
+          </ul>
+          <button name="delete" value="${id}">Delete</button>
+          <button name="update" value="${id}">Update</button>
+          <button name="cancel" value="${id}">Cancel</button>
+        </div>
+      </div>
       `
     );
   };
